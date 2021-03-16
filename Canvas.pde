@@ -34,8 +34,8 @@
    int acctSizeX = 0;
    int acctSizeY = 0;
 
-   float resX = 0;
-   float resY = 0;
+   float resX = 1;
+   float resY = 1;
 
    float dispX1 = 0;
    float dispX2 = 0;
@@ -63,11 +63,11 @@
    color labelY_col = color ( 0, 0, 0 );
 
    float lineX_start = 0;
-   float lineX_res = 0;
+   float lineX_step = 0;
    float lineX_size = 0;
    color lineX_col = color ( 0, 0, 0 );
    float lineY_start = 0;
-   float lineY_res = 0;
+   float lineY_step = 0;
    float lineY_size = 0;
    color lineY_col = color ( 0, 0, 0 );
 
@@ -101,16 +101,16 @@
 
    // === SETTER METHODES === //
 
-   public void setMark ( float startX, float startY, float stepX, float stepY, float lineSize, color col ) {
+   public void setMark ( float startX, float startY, float stepX, float stepY, float lineSizeX, float lineSizeY, color col ) {
 
-     this.markX_start = startX;
+     this.markX_start = startX * resX;
      this.markX_step  = stepX * resX;
-     this.markX_size  = lineSize;
+     this.markX_size  = lineSizeX;
      this.markX_width = 1;
 
-     this.markY_start = startY;
+     this.markY_start = startY * resY;
      this.markY_step  = stepY * resY;
-     this.markY_size  = lineSize;
+     this.markY_size  = lineSizeY;
      this.markY_width = 1;
 
      this.markX_col = col;
@@ -122,11 +122,11 @@
 
    public void setLabel ( float startX, float startY, float stepX, float stepY, float fontSize, color col ) {
 
-     this.labelX_start = startX;
+     this.labelX_start = startX * resX;
      this.labelX_step  = stepX * resX;
      this.labelX_size  = fontSize;
 
-     this.labelY_start = startY;
+     this.labelY_start = startY * resY;
      this.labelY_step  = stepY * resY;
      this.labelY_size  = fontSize;
 
@@ -154,12 +154,26 @@
    }
 
 
+   public void setPeriod ( String dateStart, String dateEnd, float valueMax, float valueMin ) {
+
+     //this.acctX1 = dateStart;
+     //this.acctX2 = dateEnd;
+     this.acctY1 = valueMax;
+     this.acctY2 = valueMin;
+
+     // code here
+
+   }
+
+
    // === PUBLIC METHODES === //
 
    public void display () {
 
      rectMode ( CORNERS );
      colorMode ( RGB );
+
+     // --- draw background --- //
 
      if ( this.border_size != 0 ) {
        strokeWeight ( this.border_size );
@@ -170,6 +184,27 @@
 
      fill ( this.background_col );
      rect ( this.dispX1, this.dispY1, this.dispX2, this.dispY2 );
+
+     // --- draw mark --- //
+
+     // horizotal mark
+     if ( this.markX_width != 0 ) {
+       stroke ( this.markX_col );
+       strokeWeight ( this.markX_width );
+       for ( float x = this.dispX1 + this.markX_start; x <= this.dispX2; x += this.markX_step ) {
+         line ( x, this.dispY1, x, this.dispY1 - this.markX_size );
+       }
+     }
+
+     // EDIT!!! (actual only positive numbers)
+     // vertical mark
+     if ( this.markY_width != 0 ) {
+       stroke ( this.markY_col );
+       strokeWeight ( this.markY_width );
+       for ( float y = this.dispY1 - this.markY_start; y >= this.dispY2; y -= this.markY_step ) {
+         line ( this.dispX1, y, this.dispX1 + this.markY_size, y );
+       }
+     }
 
      // code here
 
