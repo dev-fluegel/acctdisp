@@ -4,14 +4,17 @@
  **   TYPE     : methodes
  **   VERSION  : 1.0
  **   FILE     : main.pde
- **   SINCE    : 2021-03-14
- **   DATE     : 2021-03-14
+ **   SINCE    : 2021-03-16
+ **   DATE     : 2021-03-16
  **   LANGUAGE : german
  **   AUTHOR   : Bastian Flügel (dev-fluegel@gmx.net)
  **   COMPILER : Processing 3.5.4
  **
  **   DESCRIPTION :
  **     // write here
+ **
+ **   USED :
+ **     - Canvas (class)
  **
  ****************************************************/
 
@@ -22,6 +25,9 @@
  // === DRAW === //
 
 void draw () {
+
+  // *** TEST ONLY *** //
+  testCvs1.display();
 
   // code here
 
