@@ -3,7 +3,7 @@
  **   NAME     : AccountDisplay
  **   VERSION  : 0.1a
  **   FILE     : acctdisp.pde
- **   SINCE    : 2021-03-16
+ **   SINCE    : 2021-03-14
  **   DATE     : 2021-03-16
  **   LANGUAGE : german
  **   AUTHOR   : Bastian Flügel (dev-fluegel@gmx.net)
