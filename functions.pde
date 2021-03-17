@@ -89,3 +89,39 @@ int monthLength(int yearID, int monthID) {
 
 	return month_length;
 }
+
+
+
+int dayPerMonth ( int year, int month, int startDay, int endDay ) {
+
+  int counter = -1;
+  int totalLength = monthLength(year, month);
+
+  if ( startDay < 0 || startDay > totalLength ) {
+    println("ERROR!!! @dayPerMonth.startDay:int >> out of range");
+    return -99;
+  }
+
+  if ( endDay < 0 || endDay > totalLength ) {
+    println("ERROR!!! @dayPerMonth.endDay:int >> out of range");
+    return -99;
+  }
+
+  if ( endDay != 0 && endDay < startDay ) {
+    println("ERROR!!! @dayPerMonth.endDay:int >>  endDay > startDay");
+    return -99;
+  }
+
+  counter = totalLength;
+
+  if ( startDay > 1 && startDay < totalLength ) {
+    counter = totalLength - ( startDay - 1 );
+  }
+
+  if ( endDay > 1 && endDay > startDay && endDay < totalLength ) {
+    counter = counter - ( totalLength - ( endDay ) );
+  }
+
+  return counter;
+
+}
